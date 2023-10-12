@@ -11,7 +11,7 @@ OBJ		:= ./obj
 OBJS    := $(patsubst $(SRC)/%.c,$(OBJ)/%.o,$(SRCS))
 OUT		:= $(BIN)/libhashedbrown.a
 
-.PHONY: examples clean install
+.PHONY: examples clean
 
 $(OUT): $(OBJS)
 	ar rvs $(OUT) $^
