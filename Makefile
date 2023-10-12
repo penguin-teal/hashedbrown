@@ -25,6 +25,3 @@ examples: $(OUT) ./example/exampletable.c
 
 clean:
 	$(RMDIR) $(BIN) $(OBJ)
-
-install: $(OUT)
-	install -v -s $(OUT) $(DESTDIR)
