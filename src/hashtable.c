@@ -40,7 +40,7 @@ typedef struct Hashtable
     size_t overflowSize;
     int *overflow;
     int overflowCount;
-} hashtable_t;
+} hashtable_T;
 
 struct HashtableItem
 {
@@ -84,7 +84,7 @@ static inline int sumKey(const char *key, size_t keySize)
     return sum;
 }
 
-static size_t pushDataBuffer(hashtable_t *ht, const char *buffer, size_t requestSize, size_t bufferSize)
+static size_t pushDataBuffer(hashtable_T *ht, const char *buffer, size_t requestSize, size_t bufferSize)
 {
     if(ht->dataCountBytes + requestSize > ht->dataSize)
     {
@@ -106,7 +106,7 @@ static size_t pushDataBuffer(hashtable_t *ht, const char *buffer, size_t request
     return offset;
 }
 
-static int pushItem(hashtable_t *ht, const char *key, size_t keySize, const char *valueBuffer, size_t valueSize, int hash)
+static int pushItem(hashtable_T *ht, const char *key, size_t keySize, const char *valueBuffer, size_t valueSize, int hash)
 {
     if((ht->itemCount + 1) * sizeof(struct HashtableItem) > ht->itemsSize)
     {
@@ -143,22 +143,22 @@ static int pushItem(hashtable_t *ht, const char *key, size_t keySize, const char
     return offset;
 }
 
-static inline struct HashtableItem *getItemFromIndex(hashtable_t *ht, int item)
+static inline struct HashtableItem *getItemFromIndex(hashtable_T *ht, int item)
 {
     return ht->items + item;
 }
 
-static inline char *getItemKey(hashtable_t *ht, int item)
+static inline char *getItemKey(hashtable_T *ht, int item)
 {
     return (char*)ht->data + getItemFromIndex(ht, item)->keyOffset;
 }
 
-static inline char *getItemValue(hashtable_t *ht, int item)
+static inline char *getItemValue(hashtable_T *ht, int item)
 {
     return (char*)ht->data + getItemFromIndex(ht, item)->valueOffset;
 }
 
-static inline bool collisionInsert(hashtable_t *ht, int item)
+static inline bool collisionInsert(hashtable_T *ht, int item)
 {
     if((ht->overflowCount + 1) * sizeof(int) > ht->overflowSize)
     {
@@ -178,7 +178,7 @@ static inline bool collisionInsert(hashtable_t *ht, int item)
     return true;
 }
 
-bool htSetBuffer(hashtable_t *ht, const char *key, size_t keySize, const char *value, size_t valueSize)
+bool htSetBuffer(hashtable_T *ht, const char *key, size_t keySize, const char *value, size_t valueSize)
 {
     int hash = hashString(ht->tableSize, key, keySize);
     int item = pushItem(ht, key, keySize, value, valueSize, hash);
@@ -223,7 +223,7 @@ bool htSetBuffer(hashtable_t *ht, const char *key, size_t keySize, const char *v
     return true;
 }
 
-char *htGetBuffer(hashtable_t *ht, const char *key, size_t keySize)
+char *htGetBuffer(hashtable_T *ht, const char *key, size_t keySize)
 {
     int hash = hashString(ht->tableSize, key, keySize);
     int sum = sumKey(key, keySize);
@@ -250,7 +250,7 @@ char *htGetBuffer(hashtable_t *ht, const char *key, size_t keySize)
     }
 }
 
-bool htTableReset(hashtable_t *ht)
+bool htTableReset(hashtable_T *ht)
 {
     ht->itemCount = 1;
     ht->dataCountBytes = 0;
@@ -272,7 +272,7 @@ bool htTableReset(hashtable_t *ht)
     return true;
 }
 
-void htTableDestroy(hashtable_t *ht)
+void htTableDestroy(hashtable_T *ht)
 {
     free(ht->table);
     free(ht->items);
@@ -281,9 +281,9 @@ void htTableDestroy(hashtable_t *ht)
     free(ht);
 }
 
-hashtable_t *htTableCreate(int size)
+hashtable_T *htTableCreate(int size)
 {
-    hashtable_t *ht = malloc(sizeof(hashtable_t));
+    hashtable_T *ht = malloc(sizeof(hashtable_T));
     if(!ht)
     {
         ERR("Failed to allocate initial memory for hash table.");
@@ -343,7 +343,7 @@ hashtable_t *htTableCreate(int size)
     return ht;
 }
 
-bool htDeleteBuffer(hashtable_t *ht, const char *key, size_t keySize)
+bool htDeleteBuffer(hashtable_T *ht, const char *key, size_t keySize)
 {
     int hash = hashString(ht->tableSize, key, keySize);
     int sum = sumKey(key, keySize);
@@ -378,7 +378,7 @@ bool htDeleteBuffer(hashtable_t *ht, const char *key, size_t keySize)
     }
 }
 
-char *htNextKey(hashtable_t *ht, int *start)
+char *htNextKey(hashtable_T *ht, int *start)
 {
     int maxIndex = (int)ht->tableSize;
 

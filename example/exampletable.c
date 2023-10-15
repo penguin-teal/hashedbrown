@@ -7,7 +7,7 @@
 int main()
 {
     // Create hash table
-    hashtable_t *table = htTableCreate(5000);
+    hashtable_T *table = htTableCreate(5000);
 
     // Check if failed (will have returned NULL)
     if(!table) return 1;
