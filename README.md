@@ -1,10 +1,6 @@
 # hashedbrown
 A fast and versatile hash table library for C to store strings, numbers, or any arbitrary buffers.
 
-## Installation (Linux)
-
-Hashedbrown is a small static library. Link it with `-L` and `-l` or put it into your default lib directory.
-
 ## Build
 
 Build library into `bin/libhashedbrown.a`:
@@ -17,6 +13,13 @@ make examples
 ```
 
 ## How To
+
+The entire library revolves around a `hashtable_T*` pointer to a struct
+that is passed along with each function.
+
+The table only stores copies of whatever you pass in (as opposing to pointing
+to the inputs directly) to gurantee lifetime. It dynamically allocates memory
+by itself, meaning it must be destroyed when done with.
 
 See `examples/exampletable.c` for examples on how to use the library. It consists of calling a function to create,
 one at the end to destroy, and just a single function to get or set any entries.
