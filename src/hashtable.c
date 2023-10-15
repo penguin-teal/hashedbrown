@@ -60,7 +60,7 @@ static inline int hashChar(char value, int oldHash)
 #endif
 }
 
-static inline int hashString(int tableSize, char *value, size_t size)
+static inline int hashString(int tableSize, const char *value, size_t size)
 {
     int hash = SEED;
 
@@ -77,14 +77,14 @@ static inline size_t toQWordBoundary(size_t inSize)
     return inSize - inSize % sizeof(long int) + sizeof(long int);
 }
 
-static inline int sumKey(char *key, size_t keySize)
+static inline int sumKey(const char *key, size_t keySize)
 {
     int sum = 0;
     for(size_t i = 0; i < keySize; i++) sum += key[i];
     return sum;
 }
 
-static size_t pushDataBuffer(hashtable_t *ht, char *buffer, size_t requestSize, size_t bufferSize)
+static size_t pushDataBuffer(hashtable_t *ht, const char *buffer, size_t requestSize, size_t bufferSize)
 {
     if(ht->dataCountBytes + requestSize > ht->dataSize)
     {
@@ -106,7 +106,7 @@ static size_t pushDataBuffer(hashtable_t *ht, char *buffer, size_t requestSize, 
     return offset;
 }
 
-static int pushItem(hashtable_t *ht, char *key, size_t keySize, char *valueBuffer, size_t valueSize, int hash)
+static int pushItem(hashtable_t *ht, const char *key, size_t keySize, const char *valueBuffer, size_t valueSize, int hash)
 {
     if((ht->itemCount + 1) * sizeof(struct HashtableItem) > ht->itemsSize)
     {
@@ -178,7 +178,7 @@ static inline bool collisionInsert(hashtable_t *ht, int item)
     return true;
 }
 
-bool htSetBuffer(hashtable_t *ht, char *key, size_t keySize, char *value, size_t valueSize)
+bool htSetBuffer(hashtable_t *ht, const char *key, size_t keySize, const char *value, size_t valueSize)
 {
     int hash = hashString(ht->tableSize, key, keySize);
     int item = pushItem(ht, key, keySize, value, valueSize, hash);
@@ -223,7 +223,7 @@ bool htSetBuffer(hashtable_t *ht, char *key, size_t keySize, char *value, size_t
     return true;
 }
 
-char *htGetBuffer(hashtable_t *ht, char *key, size_t keySize)
+char *htGetBuffer(hashtable_t *ht, const char *key, size_t keySize)
 {
     int hash = hashString(ht->tableSize, key, keySize);
     int sum = sumKey(key, keySize);
@@ -343,7 +343,7 @@ hashtable_t *htTableCreate(int size)
     return ht;
 }
 
-bool htDeleteBuffer(hashtable_t *ht, char *key, size_t keySize)
+bool htDeleteBuffer(hashtable_t *ht, const char *key, size_t keySize)
 {
     int hash = hashString(ht->tableSize, key, keySize);
     int sum = sumKey(key, keySize);

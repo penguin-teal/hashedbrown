@@ -10,18 +10,18 @@ typedef struct Hashtable hashtable_t;
  * @remarks Don't rely on this pointer surviving after manipulating the hash table. You should copy it over.
  * @return A pointer to the value buffer.
  */
-char *htGetBuffer(hashtable_t *ht, char *key, unsigned long keySize);
+char *htGetBuffer(hashtable_t *ht, const char *key, unsigned long keySize);
 
 /**
  * Sets an arbitrary key buffer to an arbitrary value buffer.
  * The value buffer is copied into another buffer.
  * All other set functions are wrappers around this function.
  */
-bool htSetBuffer(hashtable_t *ht, char *key, unsigned long keySize, char *value, unsigned long valueSize);
+bool htSetBuffer(hashtable_t *ht, const char *key, unsigned long keySize, char *value, unsigned long valueSize);
 
-bool htDeleteBuffer(hashtable_t *ht, char *key, unsigned long keySize);
+bool htDeleteBuffer(hashtable_t *ht, const char *key, unsigned long keySize);
 
-bool htDeleteKey(hashtable_t *ht, char *key);
+bool htDeleteKey(hashtable_t *ht, const char *key);
 
 char *htGetString(hashtable_t *ht, char *key);
 
