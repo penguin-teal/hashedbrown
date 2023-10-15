@@ -23,59 +23,59 @@ bool htDeleteBuffer(hashtable_t *ht, const char *key, unsigned long keySize);
 
 bool htDeleteKey(hashtable_t *ht, const char *key);
 
-char *htGetString(hashtable_t *ht, char *key);
+char *htGetString(hashtable_t *ht, const char *key);
 
 /**
  * Checks if a key exists.
  * Consider just checking if `htGetString` is `NULL` instead, since that is what this function does.
  * @return `true` if the key has a value in the hash table.
  */
-bool htKeyExists(hashtable_t *ht, char *key);
+bool htKeyExists(hashtable_t *ht, const char *key);
 
 /**
  * Gets the pointer to the string.
  * @remarks Don't rely on this pointer surviving after manipulating the hash table. You should copy the value over (i.e. with `strncpy`).
  * @return Pointer to string, or `NULL` if this key doesn't exist.
  */
-char *htGetString(hashtable_t *ht, char *key);
+char *htGetString(hashtable_t *ht, const char *key);
 
-void *htGetPtr(hashtable_t *ht, char *key);
+void *htGetPtr(hashtable_t *ht, const char *key);
 
-int htGetInt(hashtable_t *ht, char *key);
+int htGetInt(hashtable_t *ht, const char *key);
 
-unsigned int htGetUInt(hashtable_t *ht, char *key);
+unsigned int htGetUInt(hashtable_t *ht, const char *key);
 
-int htGetLong(hashtable_t *ht, char *key);
+int htGetLong(hashtable_t *ht, const char *key);
 
-unsigned int htGetULong(hashtable_t *ht, char *key);
+unsigned int htGetULong(hashtable_t *ht, const char *key);
 
-short htGetShort(hashtable_t *ht, char *key);
+short htGetShort(hashtable_t *ht, const char *key);
 
-unsigned short htGetUShort(hashtable_t *ht, char *key);
+unsigned short htGetUShort(hashtable_t *ht, const char *key);
 
-char htGetChar(hashtable_t *ht, char *key);
+char htGetChar(hashtable_t *ht, const char *key);
 
-signed char htGetSChar(hashtable_t *ht, char *key);
+signed char htGetSChar(hashtable_t *ht, const char *key);
 
-bool htSetString(hashtable_t *ht, char *key, char *value);
+bool htSetString(hashtable_t *ht, const char *key, const char *value);
 
-bool htSetInt(hashtable_t *ht, char *key, int value);
+bool htSetInt(hashtable_t *ht, const char *key, int value);
 
-bool htSetUInt(hashtable_t *ht, char *key, unsigned int value);
+bool htSetUInt(hashtable_t *ht, const char *key, unsigned int value);
 
-bool htSetLong(hashtable_t *ht, char *key, long value);
+bool htSetLong(hashtable_t *ht, const char *key, long value);
 
-bool htSetULong(hashtable_t *ht, char *key, unsigned long value);
+bool htSetULong(hashtable_t *ht, const char *key, unsigned long value);
 
-bool htSetShort(hashtable_t *ht, char *key, short value);
+bool htSetShort(hashtable_t *ht, const char *key, short value);
 
-bool htSetUShort(hashtable_t *ht, char *key, unsigned short value);
+bool htSetUShort(hashtable_t *ht, const char *key, unsigned short value);
 
-bool htSetChar(hashtable_t *ht, char *key, char value);
+bool htSetChar(hashtable_t *ht, const char *key, char value);
 
-bool htSetSChar(hashtable_t *ht, char *key, signed char value);
+bool htSetSChar(hashtable_t *ht, const char *key, signed char value);
 
-bool htSetPtr(hashtable_t *ht, char *key, void* value);
+bool htSetPtr(hashtable_t *ht, const char *key, const void* value);
 
 /**
  * Allows for iterating over all the keys in the hash table.
