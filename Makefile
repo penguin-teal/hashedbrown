@@ -16,10 +16,10 @@ OUT				:= $(BIN)/libhashedbrown.a
 
 .PHONY: release debug examples clean
 
-release: CURRENTCFLAGS += CFLAGSRELEASE
+release: CURRENTCFLAGS += $(CFLAGSRELEASE)
 release: $(OUT)
 
-debug: CURRENTCFLAGS += CFLAGSDEBUG
+debug: CURRENTCFLAGS += $(CFLAGSDEBUG)
 debug: $(OUT)
 
 $(OUT): $(OBJS)
@@ -27,7 +27,7 @@ $(OUT): $(OBJS)
 
 $(OBJ)/%.o: $(SRC)/%.c
 	$(MKDIR) $(BIN) $(OBJ)
-	$(CC) -c -I$(INCLUDE) -o $@ $< $(CFLAGS) -O3
+	$(CC) -c -I$(INCLUDE) $(CURRENTCFLAGS) -o $@ $< $(CFLAGS) -O3
 
 examples: debug ./example/exampletable.c
 	$(CC) $(CFLAGS) $(CFLAGSDEBUG) -I$(INCLUDE) ./example/exampletable.c -o $(BIN)/example -L$(BIN) -lhashedbrown
