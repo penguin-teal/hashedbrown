@@ -310,8 +310,8 @@ hashtable_T *htTableCreate(int size)
     if (!ht->data)
     {
         ERR("Failed to allocate initial memory for data in hash table.\n");
-        free(ht);
         free(ht->items);
+        free(ht);
         return NULL;
     }
 
@@ -321,9 +321,9 @@ hashtable_T *htTableCreate(int size)
     if (!ht->overflow)
     {
         ERR("Failed to allocate initial memory for overflow in hash table.\n");
-        free(ht);
         free(ht->items);
         free(ht->data);
+        free(ht);
         return NULL;
     }
 
@@ -333,10 +333,10 @@ hashtable_T *htTableCreate(int size)
     if (!ht->table)
     {
         ERR("Failed to allocate initial zeroed memory for table in hash table.\n");
-        free(ht);
         free(ht->items);
         free(ht->data);
         free(ht->overflow);
+        free(ht);
         return NULL;
     }
 
