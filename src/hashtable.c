@@ -96,7 +96,6 @@ static size_t pushDataBuffer(hashtable_T *ht, const char *buffer, size_t request
             return SIZE_MAX;
         }
 
-        free(ht->data);
         ht->data = newData;
     }
 
@@ -118,7 +117,6 @@ static int pushItem(hashtable_T *ht, const char *key, size_t keySize, const char
             return INT_MAX;
         }
 
-        free(ht->items);
         ht->items = newItems;
     }
 
@@ -170,7 +168,6 @@ static inline bool collisionInsert(hashtable_T *ht, int item)
             return false;
         }
 
-        free(ht->overflow);
         ht->overflow = newOverflow;
     }
 
