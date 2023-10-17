@@ -27,7 +27,7 @@ $(OUT): $(OBJS)
 
 $(OBJ)/%.o: $(SRC)/%.c
 	$(MKDIR) $(BIN) $(OBJ)
-	$(CC) -c -I$(INCLUDE) $(CURRENTCFLAGS) -o $@ $< $(CFLAGS) -O3
+	$(CC) -c -I$(INCLUDE) $(CURRENTCFLAGS) -o $@ $< $(CFLAGS)
 
 examples: debug ./example/exampletable.c
 	$(CC) $(CFLAGS) $(CFLAGSDEBUG) -I$(INCLUDE) ./example/exampletable.c -o $(BIN)/example -L$(BIN) -lhashedbrown
