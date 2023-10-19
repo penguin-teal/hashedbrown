@@ -276,19 +276,23 @@ char *htGetBuffer(hashtable_T *ht, const char *key, size_t keySize)
 
 bool htTableReset(hashtable_T *ht)
 {
-    ht->itemCount = 1;
-    ht->dataCountBytes = 0;
-    ht->overflowCount = 0;
-    ht->tableCount = 0;
-    
     int *newTable = calloc(ht->tableSize, sizeof(int));
     if (!newTable)
     {
-        ERR("Failed to allocate new zeroed memory for table in hash table.\n");
+        ERR(
+            "Failed to allocate %lu B of new zeroed"
+            "memory for table in hash table.\n",
+            ht->tableSize * sizeof(int)
+        );
         return false;
     }
     else
     {
+        ht->itemCount = 1;
+        ht->dataCountBytes = 0;
+        ht->overflowCount = 0;
+        ht->tableCount = 0;
+
         free(ht->table);
         ht->table = newTable;
     }
