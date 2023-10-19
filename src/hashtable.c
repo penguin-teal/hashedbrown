@@ -310,7 +310,11 @@ hashtable_T *htTableCreate(int size)
     hashtable_T *ht = malloc(sizeof(hashtable_T));
     if(!ht)
     {
-        ERR("Failed to allocate initial memory for hash table.");
+        ERR(
+            "Failed to allocate initial %lu B of"
+            "memory for hash table.",
+            sizeof(hashtable_T)
+        );
         return NULL;
     }
     
@@ -322,7 +326,11 @@ hashtable_T *htTableCreate(int size)
     ht->items = malloc(ht->itemsSize);
     if(!ht->items)
     {
-        ERR("Failed to allocate initial memory for items in hash table.\n");
+        ERR(
+            "Failed to allocate initial %lu B of"
+            "memory for items in hash table.\n",
+            ht->itemsSize
+        );
         free(ht);
         return NULL;
     }
@@ -333,7 +341,11 @@ hashtable_T *htTableCreate(int size)
     ht->data = malloc(ht->dataSize);
     if (!ht->data)
     {
-        ERR("Failed to allocate initial memory for data in hash table.\n");
+        ERR(
+            "Failed to allocate initial %lu B of"
+            "memory for data in hash table.\n",
+            ht->dataSize
+        );
         free(ht->items);
         free(ht);
         return NULL;
@@ -344,7 +356,11 @@ hashtable_T *htTableCreate(int size)
     ht->overflow = malloc(ht->overflowSize);
     if (!ht->overflow)
     {
-        ERR("Failed to allocate initial memory for overflow in hash table.\n");
+        ERR(
+            "Failed to allocate initial %lu B of"
+            "memory for overflow in hash table.\n",
+            ht->overflowSize
+        );
         free(ht->items);
         free(ht->data);
         free(ht);
@@ -356,7 +372,11 @@ hashtable_T *htTableCreate(int size)
     ht->table = calloc(size, sizeof(int));
     if (!ht->table)
     {
-        ERR("Failed to allocate initial zeroed memory for table in hash table.\n");
+        ERR(
+            "Failed to allocate initial %lu B of"
+            "zeroed memory for table in hash table.\n",
+            size * sizeof(int)
+        );
         free(ht->items);
         free(ht->data);
         free(ht->overflow);
