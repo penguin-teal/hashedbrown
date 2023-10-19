@@ -280,7 +280,7 @@ bool htTableReset(hashtable_T *ht)
     if (!newTable)
     {
         ERR(
-            "Failed to allocate %lu B of new zeroed"
+            "Failed to allocate %lu B of new zeroed "
             "memory for table in hash table.\n",
             ht->tableSize * sizeof(int)
         );
@@ -315,7 +315,7 @@ hashtable_T *htTableCreate(int size)
     if(!ht)
     {
         ERR(
-            "Failed to allocate initial %lu B of"
+            "Failed to allocate initial %lu B of "
             "memory for hash table.",
             sizeof(hashtable_T)
         );
@@ -331,7 +331,7 @@ hashtable_T *htTableCreate(int size)
     if(!ht->items)
     {
         ERR(
-            "Failed to allocate initial %lu B of"
+            "Failed to allocate initial %lu B of "
             "memory for items in hash table.\n",
             ht->itemsSize
         );
@@ -346,7 +346,7 @@ hashtable_T *htTableCreate(int size)
     if (!ht->data)
     {
         ERR(
-            "Failed to allocate initial %lu B of"
+            "Failed to allocate initial %lu B of "
             "memory for data in hash table.\n",
             ht->dataSize
         );
@@ -361,7 +361,7 @@ hashtable_T *htTableCreate(int size)
     if (!ht->overflow)
     {
         ERR(
-            "Failed to allocate initial %lu B of"
+            "Failed to allocate initial %lu B of "
             "memory for overflow in hash table.\n",
             ht->overflowSize
         );
@@ -377,7 +377,7 @@ hashtable_T *htTableCreate(int size)
     if (!ht->table)
     {
         ERR(
-            "Failed to allocate initial %lu B of"
+            "Failed to allocate initial %lu B of "
             "zeroed memory for table in hash table.\n",
             size * sizeof(int)
         );
