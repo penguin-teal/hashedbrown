@@ -326,7 +326,7 @@ hashtable_T *htTableCreate(int size)
     // be a valid item
     ht->itemCount = 1;
     // Arbitrary starting capacity
-    ht->itemsSize = size / 6;
+    ht->itemsSize = toQWordBoundary(size / 6);
     ht->items = malloc(ht->itemsSize);
     if(!ht->items)
     {
@@ -341,7 +341,7 @@ hashtable_T *htTableCreate(int size)
 
     ht->dataCountBytes = 0;
     // Arbitrary starting capacity
-    ht->dataSize = size / 2;
+    ht->dataSize = toQWordBoundary(size / 2);
     ht->data = malloc(ht->dataSize);
     if (!ht->data)
     {
