@@ -46,6 +46,7 @@ int main()
     // you set it to be a string or something.
     // This returns 0 if the value doesn't exist.
     unsigned short b = htGetUShort(table, "my ushort");
+    printf("my ushort: %hu\n", b);
     
     int *a = malloc(32);
 
