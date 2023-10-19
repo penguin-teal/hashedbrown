@@ -33,9 +33,9 @@ typedef struct Hashtable
     size_t dataCountBytes;
     void *data;
 
-    int tableSize;
+    unsigned long tableSize;
     int *table;
-    int tableCount;
+    unsigned long tableCount;
 
     size_t overflowSize;
     int *overflow;
@@ -309,7 +309,7 @@ void htTableDestroy(hashtable_T *ht)
     free(ht);
 }
 
-hashtable_T *htTableCreate(int size)
+hashtable_T *htTableCreate(unsigned long size)
 {
     hashtable_T *ht = malloc(sizeof(hashtable_T));
     if(!ht)

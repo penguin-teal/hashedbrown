@@ -105,7 +105,7 @@ void htTableDestroy(hashtable_T *ht);
  * @param size The size of the hash table.
  * @return A new hashtable, or `NULL` if a memory allocation failed.
  */
-hashtable_T *htTableCreate(int size);
+hashtable_T *htTableCreate(unsigned long size);
 
 #define HASHEDBROWN_H
 #endif
