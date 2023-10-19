@@ -86,16 +86,25 @@ static inline int sumKey(const char *key, size_t keySize)
 
 static size_t pushDataBuffer(hashtable_T *ht, const char *buffer, size_t requestSize, size_t bufferSize)
 {
-    if(ht->dataCountBytes + requestSize > ht->dataSize)
+    size_t needed = ht->dataCountBytes + requestSize;
+    size_t has = ht->dataSize;
+    if(needed > has)
     {
-        ht->dataSize *= 2;
-        void *newData = realloc(ht->data, ht->dataSize);
+        // Double the buffer unless that isn't enough
+        if(has * 2 >= needed) has *= 2;
+        else has = needed;
+
+        void *newData = realloc(ht->data, has);
         if(!newData)
         {
-            ERR("Failed to allocate more memory for data in hash table.\n");
+            ERR(
+                "Failed to allocate %lu B for data in hash table.\n",
+                has
+            );
             return SIZE_MAX;
         }
 
+        ht->dataSize = has;
         ht->data = newData;
     }
 
@@ -107,16 +116,25 @@ static size_t pushDataBuffer(hashtable_T *ht, const char *buffer, size_t request
 
 static int pushItem(hashtable_T *ht, const char *key, size_t keySize, const char *valueBuffer, size_t valueSize, int hash)
 {
-    if((ht->itemCount + 1) * sizeof(struct HashtableItem) > ht->itemsSize)
+    size_t needed = (ht->itemCount + 1) * sizeof(struct HashtableItem);
+    size_t has = ht->itemsSize;
+    if(needed > has)
     {
-        ht->itemsSize *= 2;
-        void *newItems = realloc(ht->items, ht->itemsSize);
+        // Double the buffer unless that isn't enough
+        if(has * 2 >= needed) has *= 2;
+        else has = needed;
+
+        void *newItems = realloc(ht->items, has);
         if(!newItems)
         {
-            ERR("Failed to allocate more memory for items in hash table.\n");
+            ERR(
+                "Failed to allocate %lu B for items in hash table.\n",
+                has
+            );
             return INT_MAX;
         }
 
+        ht->itemsSize = has;
         ht->items = newItems;
     }
 
@@ -158,16 +176,25 @@ static inline char *getItemValue(hashtable_T *ht, int item)
 
 static inline bool collisionInsert(hashtable_T *ht, int item)
 {
-    if((ht->overflowCount + 1) * sizeof(int) > ht->overflowSize)
+    size_t needed = (ht->overflowCount + 1) * sizeof(int);
+    size_t has = ht->overflowSize;
+    if(needed > has)
     {
-        ht->overflowSize *= 2;
-        int *newOverflow = realloc(ht->overflow, ht->overflowSize);
+        // Double the buffer unless that isn't enough
+        if(has * 2 >= needed) has *= 2;
+        else has = needed;
+
+        int *newOverflow = realloc(ht->overflow, has);
         if(!newOverflow)
         {
-            ERR("Failed to allocate more memory for overflow in hash table.\n");
+            ERR(
+                "Failed to allocate %lu B for overflow in hash table.\n",
+                has
+            );
             return false;
         }
 
+        ht->overflowSize = has;
         ht->overflow = newOverflow;
     }
 
