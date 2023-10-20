@@ -69,9 +69,17 @@ int main()
     {
         key = htNextKey(table, &keyIndex);
 
-        if(key) printf("Found (key: value) pair = (\"%s\": %u)\n", key, htGetUShort(table, key));
+        if(key) printf("Found (key: value) pair = (\"%s\": %hu)\n", key, htGetUShort(table, key));
     }
     while(key);
+
+    printf("----Exists?------\n");
+    // Check if key exists
+    if(htKeyExists(table, "hello"))
+        printf("Key 'hello' exists.\n");
+
+    if(!htKeyExists(table, "i don't exist"))
+        printf("Key 'i don't exist' doesn't exist.\n");
 
     // This frees all the allocated memory
     htTableDestroy(table);
