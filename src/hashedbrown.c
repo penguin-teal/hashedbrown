@@ -126,5 +126,5 @@ bool htSetSChar(hashtable_T *ht, const char *key, signed char value)
 
 bool htSetPtr(hashtable_T *ht, const char *key, const void* value)
 {
-    return htSetBuffer(ht, key, strlen(key) + 1, (char*)value, sizeof(void*));
+    return htSetBuffer(ht, key, strlen(key) + 1, (char*)&value, sizeof(char*));
 }
