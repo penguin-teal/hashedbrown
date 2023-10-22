@@ -45,15 +45,22 @@ int main()
     // that the value actually is a ushort, even if in reality
     // you set it to be a string or something.
     // This returns 0 if the value doesn't exist.
-    unsigned short b = htGetUShort(table, "my ushort");
-    printf("my ushort: %hu\n", b);
+    unsigned short h = htGetUShort(table, "my ushort");
+    printf("my ushort: %hu\n", h);
     
-    int *a = malloc(32);
+
+    char *a = malloc(128);
+    strcpy(a, "This string is on the heap!");
 
     htSetPtr(table, "my pointer", a);
 
+    char *b = htGetPtr(table, "my pointer");
+
+    printf("my pointer: \"%s\"\n", b);
+
     // Delete a key
     htDeleteKey(table, "my pointer");
+
 
     // Just freeing the variable we malloced
     free(a);
