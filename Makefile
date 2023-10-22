@@ -2,7 +2,8 @@ MKDIR 			:= mkdir -p --
 RMDIR   		:= rm -Rf --
 CC      		:= cc
 WARNINGS		:= -Wall -Wextra
-CFLAGS  		:= $(WARNINGS) -std=c99
+ERRORS		    := -Werror=pointer-arith
+CFLAGS  		:= $(WARNINGS) $(ERRORS) -std=c99
 CFLAGSRELEASE   := -O3
 CFLAGSDEBUG	    := -g3 -DDEBUG
 CURRENTCFLAGS	:=

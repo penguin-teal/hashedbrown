@@ -109,7 +109,7 @@ static size_t pushDataBuffer(hashtable_T *ht, const char *buffer, size_t request
     }
 
     size_t offset = ht->dataCountBytes;
-    memcpy(ht->data + offset, buffer, bufferSize);
+    memcpy((char*)ht->data + offset, buffer, bufferSize);
     ht->dataCountBytes += requestSize;
     return offset;
 }
