@@ -1,12 +1,13 @@
 MKDIR 			:= mkdir -p --
 RMDIR   		:= rm -Rf --
-CC      		:= cc
+
+EXTRA_CFLAGS		:= 
 WARNINGS		:= -Wall -Wextra
-ERRORS		    := -Werror=pointer-arith
-CFLAGS  		:= $(WARNINGS) $(ERRORS) -std=c99
-CFLAGSRELEASE   := -O3
-CFLAGSDEBUG	    := -g3 -DDEBUG
-CURRENTCFLAGS	:=
+ERRORS			:= -Werror=pointer-arith
+CFLAGS  		:= $(WARNINGS) $(ERRORS) -std=c99 $(EXTRA_CFLAGS)
+CFLAGSRELEASE		:= -O3
+CFLAGSDEBUG		:= -g3 -DDEBUG
+CURRENTCFLAGS		:=
 BIN     		:= ./bin
 INCLUDE 		:= ./include
 SRC     		:= ./src
@@ -35,3 +36,4 @@ examples: debug ./example/exampletable.c
 
 clean:
 	$(RMDIR) $(BIN) $(OBJ)
+
