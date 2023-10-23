@@ -1,17 +1,29 @@
 name: build
 
 on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    push:
+        branches: [ "main" ]
+    pull_request:
+        branches: [ "main" ]
 
 jobs:
-  build:
+    build-gcc:
 
-    runs-on: ubuntu-latest
+        runs-on: ubuntu-latest
 
-    steps:
-    - uses: actions/checkout@v3
-    - name: make
-    - run: make
+        steps:
+        - uses: actions/checkout@v3
+        - run: make examples
+        - run: make clean
+
+    build-clang:
+
+        runs-on: ubuntu-latest
+
+        env:
+            CC: clang
+
+        steps:
+        - uses: actions/checkout@v3
+        - run: make examples
+        - run: make clean
