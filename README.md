@@ -1,3 +1,4 @@
+[![Build Status](https://github.com/penguin-teal/hashedbrown/actions/workflows/build.yml/badge.svg)](https://github.com/penguin-teal/hashedbrown/actions/workflows/build.yml)
 # hashedbrown
 A fast and versatile hash table library for C to store strings, numbers, or any arbitrary buffers.
 
